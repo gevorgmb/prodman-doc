@@ -1,0 +1,56 @@
+paths:
+  /login:
+    post:
+      tags: [Auth]
+      summary: Log in a user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AuthTokenResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+
+  /register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AuthTokenResponse'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /logout:
+    post:
+      tags: [Auth]
+      summary: Log out current user
+      responses:
+        '200':
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/MessageResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'

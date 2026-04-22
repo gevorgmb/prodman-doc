@@ -1,0 +1,290 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Sanctum
+
+  parameters:
+    ApartmentId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    ApartmentHeader:
+      name: apartment
+      in: header
+      required: true
+      schema:
+        type: integer
+      description: Managed apartment id used for apartment user operations
+
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageResponse'
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageResponse'
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorResponse'
+
+  schemas:
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required: [message]
+
+    ValidationErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      required: [message]
+
+    LoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required: [email, password]
+
+    RegisterRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required: [name, email, password]
+
+    UpdateCurrentUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        phone:
+          type: string
+
+    StoreApartmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        is_default:
+          type: boolean
+      required: [name]
+
+    UpdateApartmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        is_default:
+          type: boolean
+
+    AddApartmentUserRequest:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        role:
+          type: string
+      required: [user_id]
+
+    VerifyEmailCodeRequest:
+      type: object
+      properties:
+        code:
+          type: string
+      required: [code]
+
+    AuthTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required: [token, user]
+
+    VerifyEmailCodeResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required: [message, user]
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          nullable: true
+        emailVerifiedAt:
+          type: string
+          format: date-time
+          nullable: true
+        phoneVerifiedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    CurrentUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          nullable: true
+        emailVerifiedAt:
+          type: string
+          format: date-time
+          nullable: true
+        phoneVerifiedAt:
+          type: string
+          format: date-time
+          nullable: true
+        emailVerification:
+          type: boolean
+        emailVerificationLocked:
+          type: boolean
+        phoneVerification:
+          type: boolean
+        phoneVerificationLocked:
+          type: boolean
+      required:
+        - id
+        - name
+        - email
+        - emailVerification
+        - emailVerificationLocked
+        - phoneVerification
+        - phoneVerificationLocked
+
+    Apartment:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        isDefault:
+          type: boolean
+        ownerId:
+          type: integer
+      required: [id, name, isDefault, ownerId]
+
+    ApartmentUserLookupResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        alreadyInApartment:
+          type: boolean
+      required: [user, alreadyInApartment]
+
+    ApartmentUserMembership:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        userId:
+          type: integer
+        role:
+          type: string
+      required: [id, apartmentId, userId, role]
+
+    ApartmentUsersResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            type: object
+            properties:
+              membershipId:
+                type: integer
+              role:
+                type: string
+              user:
+                $ref: '#/components/schemas/User'
+            required: [membershipId, role, user]
+      required: [users]
+
+    RelatedApartmentsResponse:
+      type: object
+      properties:
+        apartments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              description:
+                type: string
+                nullable: true
+              isDefault:
+                type: boolean
+              ownerId:
+                type: integer
+              isOwner:
+                type: boolean
+              role:
+                type: string
+            required: [id, name, isDefault, ownerId, isOwner, role]
+      required: [apartments]

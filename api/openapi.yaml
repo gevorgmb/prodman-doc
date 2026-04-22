@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: Product Manager API
+  version: 1.0.0
+  description: OpenAPI documentation for the Laravel API.
+servers:
+  - url: /api
+    description: Relative API base path
+
+tags:
+  - name: Auth
+  - name: User
+  - name: Apartments
+  - name: Apartment Users
+  - name: Email Verification
+
+security:
+  - bearerAuth: []
+
+paths:
+  /login:
+    $ref: './paths/auth.yaml#/paths/~1login'
+  /register:
+    $ref: './paths/auth.yaml#/paths/~1register'
+  /logout:
+    $ref: './paths/auth.yaml#/paths/~1logout'
+
+  /send-email-verification:
+    $ref: './paths/verification.yaml#/paths/~1send-email-verification'
+  /verify-email-code:
+    $ref: './paths/verification.yaml#/paths/~1verify-email-code'
+
+  /current-user:
+    $ref: './paths/user.yaml#/paths/~1current-user'
+
+  /apartments:
+    $ref: './paths/apartments.yaml#/paths/~1apartments'
+  /apartments/{id}:
+    $ref: './paths/apartments.yaml#/paths/~1apartments~1{id}'
+
+  /apartment-users/find-by-email:
+    $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1find-by-email'
+  /apartment-users/find-by-phone:
+    $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1find-by-phone'
+  /apartment-users:
+    $ref: './paths/apartment-users.yaml#/paths/~1apartment-users'
+  /apartment-users/{userId}:
+    $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1{userId}'
+  /apartment-users/self/disconnect/{apartmentId}:
+    $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1self~1disconnect~1{apartmentId}'
+  /related-apartments:
+    $ref: './paths/apartment-users.yaml#/paths/~1related-apartments'
+
+components:
+  $ref: './components.yaml#/components'

@@ -1,0 +1,36 @@
+paths:
+  /send-email-verification:
+    post:
+      tags: [Email Verification]
+      summary: Send email verification code
+      responses:
+        '200':
+          description: Verification code sent
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/MessageResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+
+  /verify-email-code:
+    post:
+      tags: [Email Verification]
+      summary: Verify email with code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/VerifyEmailCodeRequest'
+      responses:
+        '200':
+          description: Email verified
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/VerifyEmailCodeResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'

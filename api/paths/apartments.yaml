@@ -1,0 +1,90 @@
+paths:
+  /apartments:
+    get:
+      tags: [Apartments]
+      summary: List apartments owned by current user
+      responses:
+        '200':
+          description: List of apartments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '../components.yaml#/components/schemas/Apartment'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+    post:
+      tags: [Apartments]
+      summary: Create apartment for current user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/StoreApartmentRequest'
+      responses:
+        '201':
+          description: Apartment created
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/Apartment'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /apartments/{id}:
+    get:
+      tags: [Apartments]
+      summary: Get apartment by id
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentId'
+      responses:
+        '200':
+          description: Apartment
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/Apartment'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+    patch:
+      tags: [Apartments]
+      summary: Update apartment by id
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/UpdateApartmentRequest'
+      responses:
+        '200':
+          description: Apartment updated
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/Apartment'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+    delete:
+      tags: [Apartments]
+      summary: Delete apartment by id
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentId'
+      responses:
+        '204':
+          description: Deleted
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'

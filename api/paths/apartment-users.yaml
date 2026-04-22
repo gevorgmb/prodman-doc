@@ -1,0 +1,150 @@
+paths:
+  /apartment-users/find-by-email:
+    get:
+      tags: [Apartment Users]
+      summary: Find user by email in managed apartment
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: Found user
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/ApartmentUserLookupResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /apartment-users/find-by-phone:
+    get:
+      tags: [Apartment Users]
+      summary: Find user by phone in managed apartment
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: phone
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Found user
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/ApartmentUserLookupResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /apartment-users:
+    get:
+      tags: [Apartment Users]
+      summary: List users in managed apartment
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+      responses:
+        '200':
+          description: Apartment members
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/ApartmentUsersResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+    post:
+      tags: [Apartment Users]
+      summary: Add user to managed apartment
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/AddApartmentUserRequest'
+      responses:
+        '201':
+          description: Membership created
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/ApartmentUserMembership'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /apartment-users/{userId}:
+    delete:
+      tags: [Apartment Users]
+      summary: Remove user from managed apartment
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Removed
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /apartment-users/self/disconnect/{apartmentId}:
+    delete:
+      tags: [Apartment Users]
+      summary: Disconnect current user from apartment
+      parameters:
+        - name: apartmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Disconnected
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /related-apartments:
+    get:
+      tags: [Apartment Users]
+      summary: Get apartments related to current user
+      responses:
+        '200':
+          description: Related apartments
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/RelatedApartmentsResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'

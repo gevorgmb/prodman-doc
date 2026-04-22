@@ -1,0 +1,36 @@
+paths:
+  /current-user:
+    get:
+      tags: [User]
+      summary: Get current authenticated user
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/CurrentUserResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../components.yaml#/components/responses/NotFound'
+    patch:
+      tags: [User]
+      summary: Update current authenticated user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/UpdateCurrentUserRequest'
+      responses:
+        '200':
+          description: Updated current user
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/CurrentUserResponse'
+        '401':
+          $ref: '../components.yaml#/components/responses/Unauthorized'
+        '422':
+          $ref: '../components.yaml#/components/responses/ValidationError'

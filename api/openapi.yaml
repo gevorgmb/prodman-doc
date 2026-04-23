@@ -48,8 +48,6 @@ paths:
     $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1{userId}'
   /apartment-users/self/disconnect/{apartmentId}:
     $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1self~1disconnect~1{apartmentId}'
-  /related-apartments:
-    $ref: './paths/apartment-users.yaml#/paths/~1related-apartments'
 
 components:
   $ref: './components.yaml#/components'

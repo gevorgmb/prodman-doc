@@ -134,17 +134,3 @@ paths:
           $ref: '../components.yaml#/components/responses/NotFound'
         '422':
           $ref: '../components.yaml#/components/responses/ValidationError'
-
-  /related-apartments:
-    get:
-      tags: [Apartment Users]
-      summary: Get apartments related to current user
-      responses:
-        '200':
-          description: Related apartments
-          content:
-            application/json:
-              schema:
-                $ref: '../components.yaml#/components/schemas/RelatedApartmentsResponse'
-        '401':
-          $ref: '../components.yaml#/components/responses/Unauthorized'

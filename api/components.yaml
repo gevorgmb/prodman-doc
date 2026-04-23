@@ -224,6 +224,26 @@ components:
           type: integer
       required: [id, name, isDefault, ownerId]
 
+    RelatedApartment:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        isDefault:
+          type: boolean
+        ownerId:
+          type: integer
+        isOwner:
+          type: boolean
+        role:
+          type: string
+      required: [id, name, isDefault, ownerId, isOwner, role]
+
     ApartmentUserLookupResponse:
       type: object
       properties:
@@ -262,29 +282,3 @@ components:
                 $ref: '#/components/schemas/User'
             required: [membershipId, role, user]
       required: [users]
-
-    RelatedApartmentsResponse:
-      type: object
-      properties:
-        apartments:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              description:
-                type: string
-                nullable: true
-              isDefault:
-                type: boolean
-              ownerId:
-                type: integer
-              isOwner:
-                type: boolean
-              role:
-                type: string
-            required: [id, name, isDefault, ownerId, isOwner, role]
-      required: [apartments]

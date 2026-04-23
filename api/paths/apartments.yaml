@@ -2,16 +2,21 @@ paths:
   /apartments:
     get:
       tags: [Apartments]
-      summary: List apartments owned by current user
+      summary: List all apartments related to the current user
+      description: Returns apartments owned by the current user and apartments where the current user is a member.
       responses:
         '200':
-          description: List of apartments
+          description: Related apartments
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '../components.yaml#/components/schemas/Apartment'
+                type: object
+                properties:
+                  apartments:
+                    type: array
+                    items:
+                      $ref: '../components.yaml#/components/schemas/RelatedApartment'
+                required: [apartments]
         '401':
           $ref: '../components.yaml#/components/responses/Unauthorized'
     post:

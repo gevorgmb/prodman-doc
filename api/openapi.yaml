@@ -49,5 +49,18 @@ paths:
   /apartment-users/self/disconnect/{apartmentId}:
     $ref: './paths/apartment-users.yaml#/paths/~1apartment-users~1self~1disconnect~1{apartmentId}'
 
+  /categories:
+    $ref: './paths/categories.yaml#/paths/~1categories'
+  /categories/{id}:
+    $ref: './paths/categories.yaml#/paths/~1categories~1{id}'
+  /departments:
+    $ref: './paths/departments.yaml#/paths/~1departments'
+  /departments/{id}:
+    $ref: './paths/departments.yaml#/paths/~1departments~1{id}'
+  /products:
+    $ref: './paths/products.yaml#/paths/~1products'
+  /products/{id}:
+    $ref: './paths/products.yaml#/paths/~1products~1{id}'
+
 components:
   $ref: './components.yaml#/components'

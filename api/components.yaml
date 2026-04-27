@@ -282,3 +282,160 @@ components:
                 $ref: '#/components/schemas/User'
             required: [membershipId, role, user]
       required: [users]
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        name:
+          type: string
+      required: [id, apartmentId, name]
+
+    StoreCategoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required: [name]
+
+    UpdateCategoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+
+    CategoriesResponse:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+      required: [categories]
+
+    CategoryResponse:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/Category'
+      required: [category]
+
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        name:
+          type: string
+      required: [id, apartmentId, name]
+
+    StoreDepartmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required: [name]
+
+    UpdateDepartmentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+
+    DepartmentsResponse:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+      required: [departments]
+
+    DepartmentResponse:
+      type: object
+      properties:
+        department:
+          $ref: '#/components/schemas/Department'
+      required: [department]
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        name:
+          type: string
+        importance:
+          type: integer
+        categoryId:
+          type: integer
+          nullable: true
+        departmentId:
+          type: integer
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      required: [id, apartmentId, name, importance]
+
+    StoreProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        importance:
+          type: integer
+          minimum: 0
+          maximum: 10
+        categoryId:
+          type: integer
+          nullable: true
+        departmentId:
+          type: integer
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      required: [name, importance]
+
+    UpdateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        importance:
+          type: integer
+          minimum: 0
+          maximum: 10
+        categoryId:
+          type: integer
+          nullable: true
+        departmentId:
+          type: integer
+          nullable: true
+        description:
+          type: string
+          nullable: true
+
+    ProductsResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required: [products]
+
+    ProductResponse:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+      required: [product]

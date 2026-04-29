@@ -1,0 +1,112 @@
+paths:
+  /acquisitions:
+    get:
+      summary: List all acquisitions
+      tags: [Acquisitions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+      responses:
+        200:
+          description: A list of acquisitions
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionsResponse'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+    post:
+      summary: Create a new acquisition
+      tags: [Acquisitions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/StoreAcquisitionRequest'
+      responses:
+        201:
+          description: Acquisition created
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionResponse'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /acquisitions/{id}:
+    get:
+      summary: Get acquisition by id
+      tags: [Acquisitions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Acquisition found
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionResponse'
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'
+
+    patch:
+      summary: Update an acquisition
+      tags: [Acquisitions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/UpdateAcquisitionRequest'
+      responses:
+        200:
+          description: Acquisition updated
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionResponse'
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+    delete:
+      summary: Delete an acquisition
+      tags: [Acquisitions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Acquisition deleted
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'

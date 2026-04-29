@@ -439,3 +439,292 @@ components:
         product:
           $ref: '#/components/schemas/Product'
       required: [product]
+
+    Acquisition:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        storeName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [draft, active, complete, canceled]
+        userId:
+          type: integer
+      required: [id, apartmentId, storeName, status, userId]
+
+    StoreAcquisitionRequest:
+      type: object
+      properties:
+        storeName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [draft, active, complete, canceled]
+          nullable: true
+      required: [storeName]
+
+    UpdateAcquisitionRequest:
+      type: object
+      properties:
+        storeName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [draft, active, complete, canceled]
+
+    AcquisitionsResponse:
+      type: object
+      properties:
+        acquisitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Acquisition'
+      required: [acquisitions]
+
+    AcquisitionResponse:
+      type: object
+      properties:
+        acquisition:
+          $ref: '#/components/schemas/Acquisition'
+      required: [acquisition]
+
+    AcquisitionItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        acquisitionId:
+          type: integer
+        productId:
+          type: integer
+          nullable: true
+        productName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        expirationDate:
+          type: string
+          format: date-time
+          nullable: true
+        quantity:
+          type: number
+        price:
+          type: number
+        total:
+          type: number
+      required: [id, acquisitionId, productName, quantity, price, total]
+
+    StoreAcquisitionItemRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          nullable: true
+        productName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        expirationDate:
+          type: string
+          format: date-time
+          nullable: true
+        quantity:
+          type: number
+        price:
+          type: number
+      required: [productName, quantity, price]
+
+    UpdateAcquisitionItemRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          nullable: true
+        productName:
+          type: string
+        description:
+          type: string
+          nullable: true
+        expirationDate:
+          type: string
+          format: date-time
+          nullable: true
+        quantity:
+          type: number
+        price:
+          type: number
+
+    AcquisitionItemsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AcquisitionItem'
+      required: [items]
+
+    AcquisitionItemResponse:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/AcquisitionItem'
+      required: [item]
+
+    StockProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+      required: [id, apartmentId, itemId, productName, quantity, quantityUsed, expirationDate]
+
+    StoreStockProductRequest:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+      required: [itemId, productName, quantity, quantityUsed, expirationDate]
+
+    UpdateStockProductRequest:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+
+    StockProductsResponse:
+      type: object
+      properties:
+        stockProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/StockProduct'
+      required: [stockProducts]
+
+    StockProductResponse:
+      type: object
+      properties:
+        stockProduct:
+          $ref: '#/components/schemas/StockProduct'
+      required: [stockProduct]
+
+    ArchivedAcquisitionItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+        archiveDate:
+          type: string
+          format: date-time
+      required: [id, apartmentId, itemId, productName, quantity, quantityUsed, expirationDate, archiveDate]
+
+    StoreArchivedAcquisitionItemRequest:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+        archiveDate:
+          type: string
+          format: date-time
+      required: [itemId, productName, quantity, quantityUsed, expirationDate, archiveDate]
+
+    UpdateArchivedAcquisitionItemRequest:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        productName:
+          type: string
+        quantity:
+          type: number
+        quantityUsed:
+          type: number
+        expirationDate:
+          type: string
+          format: date-time
+        archiveDate:
+          type: string
+          format: date-time
+
+    ArchivedAcquisitionItemsResponse:
+      type: object
+      properties:
+        archivedItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ArchivedAcquisitionItem'
+      required: [archivedItems]
+
+    ArchivedAcquisitionItemResponse:
+      type: object
+      properties:
+        archivedItem:
+          $ref: '#/components/schemas/ArchivedAcquisitionItem'
+      required: [archivedItem]
+

@@ -62,5 +62,26 @@ paths:
   /products/{id}:
     $ref: './paths/products.yaml#/paths/~1products~1{id}'
 
+  /acquisitions:
+    $ref: './paths/acquisitions.yaml#/paths/~1acquisitions'
+  /acquisitions/{id}:
+    $ref: './paths/acquisitions.yaml#/paths/~1acquisitions~1{id}'
+  
+  /acquisitions/{acquisitionId}/items:
+    $ref: './paths/acquisition-items.yaml#/paths/~1acquisitions~1{acquisitionId}~1items'
+  /acquisitions/{acquisitionId}/items/{id}:
+    $ref: './paths/acquisition-items.yaml#/paths/~1acquisitions~1{acquisitionId}~1items~1{id}'
+
+  /stock-products:
+    $ref: './paths/stock-products.yaml#/paths/~1stock-products'
+  /stock-products/{id}:
+    $ref: './paths/stock-products.yaml#/paths/~1stock-products~1{id}'
+
+  /archived-acquisition-items:
+    $ref: './paths/archived-acquisition-items.yaml#/paths/~1archived-acquisition-items'
+  /archived-acquisition-items/{id}:
+    $ref: './paths/archived-acquisition-items.yaml#/paths/~1archived-acquisition-items~1{id}'
+
+
 components:
   $ref: './components.yaml#/components'

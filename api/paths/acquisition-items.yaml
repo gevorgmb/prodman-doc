@@ -1,0 +1,137 @@
+paths:
+  /acquisitions/{acquisitionId}/items:
+    get:
+      summary: List all items for an acquisition
+      tags: [Acquisition Items]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: acquisitionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of acquisition items
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionItemsResponse'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+    post:
+      summary: Create a new acquisition item
+      tags: [Acquisition Items]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: acquisitionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/StoreAcquisitionItemRequest'
+      responses:
+        201:
+          description: Acquisition item created
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionItemResponse'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+  /acquisitions/{acquisitionId}/items/{id}:
+    get:
+      summary: Get acquisition item by id
+      tags: [Acquisition Items]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: acquisitionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Acquisition item found
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionItemResponse'
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'
+
+    patch:
+      summary: Update an acquisition item
+      tags: [Acquisition Items]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: acquisitionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/UpdateAcquisitionItemRequest'
+      responses:
+        200:
+          description: Acquisition item updated
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/AcquisitionItemResponse'
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
+    delete:
+      summary: Delete an acquisition item
+      tags: [Acquisition Items]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: acquisitionId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Acquisition item deleted
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'

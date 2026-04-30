@@ -17,28 +17,7 @@ paths:
         422:
           $ref: '../components.yaml#/components/responses/ValidationError'
 
-    post:
-      summary: Create a new archived acquisition item
-      tags: [Archived Acquisition Items]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../components.yaml#/components/schemas/StoreArchivedAcquisitionItemRequest'
-      responses:
-        201:
-          description: Archived acquisition item created
-          content:
-            application/json:
-              schema:
-                $ref: '../components.yaml#/components/schemas/ArchivedAcquisitionItemResponse'
-        422:
-          $ref: '../components.yaml#/components/responses/ValidationError'
+
 
   /archived-acquisition-items/{id}:
     get:
@@ -63,50 +42,4 @@ paths:
         404:
           $ref: '../components.yaml#/components/responses/NotFound'
 
-    patch:
-      summary: Update an archived acquisition item
-      tags: [Archived Acquisition Items]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../components.yaml#/components/schemas/UpdateArchivedAcquisitionItemRequest'
-      responses:
-        200:
-          description: Archived acquisition item updated
-          content:
-            application/json:
-              schema:
-                $ref: '../components.yaml#/components/schemas/ArchivedAcquisitionItemResponse'
-        404:
-          $ref: '../components.yaml#/components/responses/NotFound'
-        422:
-          $ref: '../components.yaml#/components/responses/ValidationError'
 
-    delete:
-      summary: Delete an archived acquisition item
-      tags: [Archived Acquisition Items]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        204:
-          description: Archived acquisition item deleted
-        404:
-          $ref: '../components.yaml#/components/responses/NotFound'

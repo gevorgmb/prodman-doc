@@ -17,28 +17,7 @@ paths:
         422:
           $ref: '../components.yaml#/components/responses/ValidationError'
 
-    post:
-      summary: Create a new stock product
-      tags: [Stock Products]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../components.yaml#/components/schemas/StoreStockProductRequest'
-      responses:
-        201:
-          description: Stock product created
-          content:
-            application/json:
-              schema:
-                $ref: '../components.yaml#/components/schemas/StockProductResponse'
-        422:
-          $ref: '../components.yaml#/components/responses/ValidationError'
+
 
   /stock-products/{id}:
     get:
@@ -63,50 +42,4 @@ paths:
         404:
           $ref: '../components.yaml#/components/responses/NotFound'
 
-    patch:
-      summary: Update a stock product
-      tags: [Stock Products]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../components.yaml#/components/schemas/UpdateStockProductRequest'
-      responses:
-        200:
-          description: Stock product updated
-          content:
-            application/json:
-              schema:
-                $ref: '../components.yaml#/components/schemas/StockProductResponse'
-        404:
-          $ref: '../components.yaml#/components/responses/NotFound'
-        422:
-          $ref: '../components.yaml#/components/responses/ValidationError'
 
-    delete:
-      summary: Delete a stock product
-      tags: [Stock Products]
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        204:
-          description: Stock product deleted
-        404:
-          $ref: '../components.yaml#/components/responses/NotFound'

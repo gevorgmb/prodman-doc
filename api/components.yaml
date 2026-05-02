@@ -471,7 +471,11 @@ components:
           type: string
           enum: [draft, complete]
           nullable: true
-      required: [storeName]
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/StoreAcquisitionItemRequest'
+      required: [storeName, items]
 
     UpdateAcquisitionRequest:
       type: object
@@ -484,6 +488,11 @@ components:
         status:
           type: string
           enum: [draft, complete, cancelled]
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateAcquisitionItemRequest'
+      required: [items]
 
     AcquisitionsResponse:
       type: object
@@ -552,11 +561,19 @@ components:
     UpdateAcquisitionItemRequest:
       type: object
       properties:
+        action:
+          type: string
+          enum: [create, update, delete]
+          nullable: true
+        itemId:
+          type: integer
+          nullable: true
         productId:
           type: integer
           nullable: true
         productName:
           type: string
+          nullable: true
         description:
           type: string
           nullable: true
@@ -566,8 +583,10 @@ components:
           nullable: true
         quantity:
           type: number
+          nullable: true
         price:
           type: number
+          nullable: true
 
     AcquisitionItemsResponse:
       type: object

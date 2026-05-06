@@ -383,7 +383,11 @@ components:
         description:
           type: string
           nullable: true
-      required: [id, apartmentId, name, importance]
+        min:
+          type: number
+        unit:
+          type: string
+      required: [id, apartmentId, name, importance, min, unit]
 
     StoreProductRequest:
       type: object
@@ -403,6 +407,10 @@ components:
         description:
           type: string
           nullable: true
+        min:
+          type: number
+        unit:
+          type: string
       required: [name, importance]
 
     UpdateProductRequest:
@@ -423,6 +431,10 @@ components:
         description:
           type: string
           nullable: true
+        min:
+          type: number
+        unit:
+          type: string
 
     ProductsResponse:
       type: object
@@ -622,7 +634,12 @@ components:
         expirationDate:
           type: string
           format: date-time
-      required: [id, apartmentId, itemId, productName, quantity, quantityUsed, expirationDate]
+          nullable: true
+        min:
+          type: number
+        unit:
+          type: string
+      required: [id, apartmentId, itemId, productName, quantity, quantityUsed, expirationDate, min, unit]
 
 
 
@@ -641,6 +658,12 @@ components:
         stockProduct:
           $ref: '#/components/schemas/StockProduct'
       required: [stockProduct]
+
+    UpdateStockProductRequest:
+      type: object
+      properties:
+        quantityUsed:
+          type: number
 
     ArchivedAcquisitionItem:
       type: object
@@ -682,4 +705,24 @@ components:
         archivedItem:
           $ref: '#/components/schemas/ArchivedAcquisitionItem'
       required: [archivedItem]
+
+    Currency:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        symbol:
+          type: string
+      required: [id, code, symbol]
+
+    CurrenciesResponse:
+      type: object
+      properties:
+        currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Currency'
+      required: [currencies]
 

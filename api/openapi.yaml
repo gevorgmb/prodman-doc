@@ -62,6 +62,9 @@ paths:
   /products/{id}:
     $ref: './paths/products.yaml#/paths/~1products~1{id}'
 
+  /currencies:
+    $ref: './paths/currencies.yaml#/paths/~1currencies'
+
   /acquisitions:
     $ref: './paths/acquisitions.yaml#/paths/~1acquisitions'
   /acquisitions/{id}:

@@ -42,4 +42,34 @@ paths:
         404:
           $ref: '../components.yaml#/components/responses/NotFound'
 
+    patch:
+      summary: Update a stock product
+      tags: [Stock Products]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/UpdateStockProductRequest'
+      responses:
+        200:
+          description: Stock product updated
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/StockProductResponse'
+        404:
+          $ref: '../components.yaml#/components/responses/NotFound'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
+
 

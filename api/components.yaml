@@ -469,6 +469,9 @@ components:
           enum: [draft, complete, cancelled]
         userId:
           type: integer
+        currencyId:
+          type: integer
+          nullable: true
       required: [id, apartmentId, storeName, status, userId]
 
     StoreAcquisitionRequest:
@@ -482,6 +485,9 @@ components:
         status:
           type: string
           enum: [draft, complete]
+          nullable: true
+        currencyId:
+          type: integer
           nullable: true
         items:
           type: array
@@ -500,6 +506,9 @@ components:
         status:
           type: string
           enum: [draft, complete, cancelled]
+        currencyId:
+          type: integer
+          nullable: true
         items:
           type: array
           items:
@@ -547,7 +556,9 @@ components:
           type: number
         total:
           type: number
-      required: [id, acquisitionId, productName, quantity, price, total]
+        unit:
+          type: string
+      required: [id, acquisitionId, productName, quantity, price, total, unit]
 
     StoreAcquisitionItemRequest:
       type: object
@@ -568,6 +579,8 @@ components:
           type: number
         price:
           type: number
+        unit:
+          type: string
       required: [productName, quantity, price]
 
     UpdateAcquisitionItemRequest:
@@ -598,6 +611,9 @@ components:
           nullable: true
         price:
           type: number
+          nullable: true
+        unit:
+          type: string
           nullable: true
 
     AcquisitionItemsResponse:

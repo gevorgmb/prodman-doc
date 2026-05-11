@@ -387,7 +387,9 @@ components:
           type: number
         unit:
           type: string
-      required: [id, apartmentId, name, importance, min, unit]
+        mergeStock:
+          type: boolean
+      required: [id, apartmentId, name, importance, min, unit, mergeStock]
 
     StoreProductRequest:
       type: object
@@ -411,6 +413,9 @@ components:
           type: number
         unit:
           type: string
+        mergeStock:
+          type: boolean
+          nullable: true
       required: [name, importance]
 
     UpdateProductRequest:
@@ -435,6 +440,9 @@ components:
           type: number
         unit:
           type: string
+        mergeStock:
+          type: boolean
+          nullable: true
 
     ProductsResponse:
       type: object
@@ -643,9 +651,7 @@ components:
           type: integer
         productName:
           type: string
-        quantity:
-          type: number
-        quantityUsed:
+        quantityAvailable:
           type: number
         expirationDate:
           type: string
@@ -655,7 +661,7 @@ components:
           type: number
         unit:
           type: string
-      required: [id, apartmentId, itemId, productName, quantity, quantityUsed, expirationDate, min, unit]
+      required: [id, apartmentId, itemId, productName, quantityAvailable, expirationDate, min, unit]
 
 
 
@@ -678,7 +684,7 @@ components:
     UpdateStockProductRequest:
       type: object
       properties:
-        quantityUsed:
+        quantityAvailable:
           type: number
 
     ArchivedAcquisitionItem:

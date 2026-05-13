@@ -16,8 +16,23 @@ paths:
                 $ref: '../components.yaml#/components/schemas/StockProductsResponse'
         422:
           $ref: '../components.yaml#/components/responses/ValidationError'
-
-
+  /products-with-stock:
+    get:
+      summary: List all products with their stock information
+      tags: [Stock Products]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '../components.yaml#/components/parameters/ApartmentHeader'
+      responses:
+        200:
+          description: A list of products with stock
+          content:
+            application/json:
+              schema:
+                $ref: '../components.yaml#/components/schemas/ProductsStockResponse'
+        422:
+          $ref: '../components.yaml#/components/responses/ValidationError'
 
   /stock-products/{id}:
     get:

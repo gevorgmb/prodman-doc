@@ -661,9 +661,60 @@ components:
           type: number
         unit:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       required: [id, apartmentId, itemId, productName, quantityAvailable, expirationDate, min, unit]
 
+    ProductStock:
+      type: object
+      properties:
+        id:
+          type: integer
+        apartmentId:
+          type: integer
+        name:
+          type: string
+        importance:
+          type: integer
+        categoryId:
+          type: integer
+          nullable: true
+        departmentId:
+          type: integer
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        min:
+          type: number
+        unit:
+          type: string
+        mergeStock:
+          type: boolean
+        category:
+          $ref: '#/components/schemas/Category'
+        department:
+          $ref: '#/components/schemas/Department'
+        stockProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/StockProduct'
+        totalCount:
+          type: number
+      required: [id, apartmentId, name, importance, min, unit, mergeStock, stockProducts, totalCount]
 
+    ProductsStockResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductStock'
+      required: [products]
 
     StockProductsResponse:
       type: object

@@ -79,6 +79,8 @@ paths:
     $ref: './paths/stock-products.yaml#/paths/~1stock-products'
   /stock-products/{id}:
     $ref: './paths/stock-products.yaml#/paths/~1stock-products~1{id}'
+  /products-with-stock:
+    $ref: './paths/stock-products.yaml#/paths/~1products-with-stock'
 
   /archived-acquisition-items:
     $ref: './paths/archived-acquisition-items.yaml#/paths/~1archived-acquisition-items'

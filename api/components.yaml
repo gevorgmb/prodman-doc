@@ -737,6 +737,13 @@ components:
       properties:
         quantityAvailable:
           type: number
+          nullable: true
+        archive:
+          type: boolean
+          nullable: true
+        reason:
+          type: string
+          nullable: true
 
     ArchivedAcquisitionItem:
       type: object

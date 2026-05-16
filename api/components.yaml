@@ -101,7 +101,9 @@ components:
           nullable: true
         is_default:
           type: boolean
-      required: [name]
+        currencyId:
+          type: integer
+      required: [name, currencyId]
 
     UpdateApartmentRequest:
       type: object
@@ -113,6 +115,9 @@ components:
           nullable: true
         is_default:
           type: boolean
+        currencyId:
+          type: integer
+          nullable: true
 
     AddApartmentUserRequest:
       type: object
@@ -222,7 +227,9 @@ components:
           type: boolean
         ownerId:
           type: integer
-      required: [id, name, isDefault, ownerId]
+        currencyId:
+          type: integer
+      required: [id, name, isDefault, ownerId, currencyId]
 
     RelatedApartment:
       type: object
@@ -238,6 +245,9 @@ components:
           type: boolean
         ownerId:
           type: integer
+        currencyId:
+          type: integer
+          nullable: true
         isOwner:
           type: boolean
         role:
